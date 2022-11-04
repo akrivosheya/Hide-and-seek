@@ -7,15 +7,12 @@ public class SessionManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus status { get; private set; }
 
-    private NetworkService _network;
-
     private bool _isSeekMode;
 
-    public void Startup(NetworkService service)
+    public void Startup()
     {
         Debug.Log("Session manager starting...");
 
-        _network = service;
         _isSeekMode = false;
 
         status = ManagerStatus.Started;

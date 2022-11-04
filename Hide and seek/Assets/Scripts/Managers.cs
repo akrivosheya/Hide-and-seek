@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 [RequireComponent(typeof(SessionManager))]
 
 public class Managers : MonoBehaviour
 {
-    public static SessionManager Session {get; private set;}
+    public static SessionManager Session { get; private set; }
+    public static NetworkManager Network { get => NetworkManager.Singleton; }
 
     private List<IGameManager> _startSequence;
 
@@ -24,11 +26,9 @@ public class Managers : MonoBehaviour
 
     private IEnumerator StartupManager()
     {
-        NetworkService network = new NetworkService();
-
         foreach(IGameManager manager in _startSequence)
         {
-            manager.Startup(network);
+            manager.Startup();
         }
 
         yield return null;

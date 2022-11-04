@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private Text information;
+    [SerializeField] private GameObject networkButtons;
 
-    private string _howToHide = "Press E to Hide";
-    private string _prepareToSeek = "Ready for seek!";
-    private string _howToSeek = "To check object use mouse";
-    private string _prepareToHide = "Everybody is found!";
+    private const string HowToHide = "Press E to Hide";
+    private const string PrepareToSeek = "Ready for seek!";
+    private const string HowToSeek = "To check object use mouse";
+    private const string PrepareToHide = "Everybody is found!";
 
     void Awake()
     {
@@ -30,26 +31,36 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        information.text = _howToHide;
+        information.text = HowToHide;
     }
 
     public void OnReadyToSeek()
     {
-        information.text = _prepareToSeek;
+        information.text = PrepareToSeek;
     }
 
     public void OnStartedSeekMode()
     {
-        information.text = _howToSeek;
+        information.text = HowToSeek;
     }
 
     public void OnReadyToHide()
     {
-        information.text = _prepareToHide;
+        information.text = PrepareToHide;
     }
 
     public void OnStartedHideMode()
     {
-        information.text = _howToHide;
+        information.text = HowToHide;
+    }
+
+    public void OnStartedHost(){
+        Managers.Network.StartHost();
+        networkButtons.SetActive(false);
+    }
+
+    public void OnStartedClient(){
+        Managers.Network.StartClient();
+        networkButtons.SetActive(false);
     }
 }
